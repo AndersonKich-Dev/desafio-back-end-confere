@@ -44,6 +44,7 @@ $ No campo type a informação tem que ser passada com letra maiuscula poi criei
  $ Recuperar transações rota => GET http://localhost:3000/transaction
  
  $ Recuperar transações rota => GET http://localhost:3000/transaction/filter
+ 
  $ Esta rota aceita filtros individuais:
  * holder
  * type
