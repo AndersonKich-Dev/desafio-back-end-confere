@@ -4,7 +4,6 @@ const transaction = require('../services/transaction')
 module.exports = {
     async create(request, response, next){
         const data = request.body
-       
 
         try {           
             const transactionId =  await transaction.create(data)

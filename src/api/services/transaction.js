@@ -5,7 +5,8 @@ const see = require('../../helpers/see')
 module.exports =  {
 
     create: async function(data){
-        const { value, description, type, installments, card:{number, exipiry, cvv, holder}} = data
+        const { value, description, type, installments, card:{number, expiry, cvv, holder}} = data
+       
         const idCard = generateId();
         const idTransaction = generateId()
         const updatedValue = see.discountRate(value, type, installments)
@@ -18,7 +19,7 @@ module.exports =  {
             await knex('card').insert({
                 id: idCard,
                 number: number.slice(-4),
-                exipiry,
+                expiry,
                 cvv,
                 holder
             })  
@@ -46,7 +47,10 @@ module.exports =  {
         },
 
         list: async function(){
-        return  await knex('transaction').select('*') 
+            const obj = await knex('transaction')
+            .join('card', 'transaction.card_id', '=', 'card.id')
+            .select(['transaction.*','card.*']) 
+            return obj
         },
 
         filterHolder: async function(holder){

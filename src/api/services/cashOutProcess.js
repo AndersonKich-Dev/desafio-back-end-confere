@@ -1,4 +1,3 @@
-const { select } = require('underscore')
 const knex = require('../database')
 
 module.exports = {
@@ -25,7 +24,7 @@ module.exports = {
     filterStatus: async function( status ){
         const obj = await knex('transaction')
         .join('card', 'transaction.card_id', '=', 'card.id')
-        .select('transaction.*', 'card.number', 'card.exipiry', 'card.cvv', 'card.holder')
+        .select('transaction.*', 'card.number', 'card.expiry', 'card.cvv', 'card.holder')
         
         let resultado= obj
 
@@ -43,6 +42,33 @@ module.exports = {
           
       return resultado.filter(a => a.atributo2.length >= 1)
 
+    },
+
+    filterType: async function( type ){
+        const obj = await knex('transaction')
+        .join('card', 'transaction.card_id', '=', 'card.id')
+        .where({'transaction.type': type})
+        .select('transaction.*', 'card.number', 'card.expiry', 'card.cvv', 'card.holder')
+        
+        let resultado= obj
+
+        let resultsPromise = obj.map(async item => {
+        let atributo2 = await knex('financials')
+                .where({'financials.transaction_id': item.id})               
+                .distinct()
+
+            item.atributo2 = atributo2
+        return item
+        })
+
+      resultado = await Promise.all(resultsPromise)
+          
+      return resultado.filter(a => a.atributo2.length >= 1)
+
     }
 }
+
+
+
+
 

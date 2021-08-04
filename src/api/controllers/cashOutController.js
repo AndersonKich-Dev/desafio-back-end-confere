@@ -33,6 +33,10 @@ module.exports = {
             list = await cashOut.filterStatus(status)
         }
 
+        if(type){
+            list = await cashOut.filterType(type)
+        }
+
         
 
         return response.json({data: list})
