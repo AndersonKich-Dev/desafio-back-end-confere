@@ -50,3 +50,5 @@ $ No campo type a informação tem que ser passada com letra maiuscula poi criei
  * type
  * maior_que
  * menor_que
+
+$ Recuperar lista os recebiveis rota => GET http://localhost:3000/transaction
