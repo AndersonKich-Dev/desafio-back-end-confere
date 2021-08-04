@@ -46,9 +46,18 @@ $ No campo type a informação tem que ser passada com letra maiuscula poi criei
  $ Recuperar transações rota => GET http://localhost:3000/transaction/filter
  
  $ Esta rota aceita filtros individuais:
- * holder
- * type
- * maior_que
- * menor_que
+ * holder       => nome do titular do cartão
+ * type         => tipo de transação DEBIT, CREDIT ou INSTALLMENT_CREDIT
+ * maior_que	=> lista em ordem do maior para menor valor de compra
+ * menor_que	=> lista em ordem do menor para maior valor de compra
 
-$ Recuperar lista os recebiveis rota => GET http://localhost:3000/transaction
+$ Recuperar lista os recebiveis rota => GET http://localhost:3000/cash_out/get
+
+$ Recuperar transações rota => GET http://localhost:3000/cash_out/filter
+
+$ Esta rota aceita filtros individuais, anbos devem ser passados em  letra MAIÚSCULA:
+* type		=> tipo de transação DEBIT, CREDIT ou INSTALLMENT_CREDIT
+* status	=> status EXPECTED, RECEIVED
+
+$ Recupera o saldo do cliente rota => GET http://localhost:3000/cash_out
+
