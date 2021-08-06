@@ -15,6 +15,7 @@
 ```bash
  $ yarn
  $ npx knex migrate:latest
+ $ npm install nodemon -D
  $ yarn start
 
  ```
