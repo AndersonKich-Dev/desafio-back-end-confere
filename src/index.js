@@ -1,9 +1,11 @@
+
 const express = require('express')
 const cors = require('cors')
 const routes = require('./routes')
 const app = express()
 
-
+const port = process.env.PORT || 3000;
+require ('dotenv'). config ();
 
 
 
@@ -17,6 +19,7 @@ app.use((error, request, response, next)=>{
     response.json({ error: error.message })
 })
 
-app.listen(3000, ()=> {
+app.listen(port, ()=> {
     console.log('Back-end executando')
+  
 })
